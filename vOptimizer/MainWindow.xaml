@@ -138,7 +138,7 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <TextBlock Text="TRẠNG THÁI HỆ THỐNG (SYSTEM STATUS)" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                                        <TextBlock Text="SYSTEM STATUS" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
                                         
                                         <!-- Temperature -->
                                         <Grid Grid.Row="1" Margin="0,0,0,8">
@@ -146,7 +146,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Nhiệt Độ Vi Xử Lý (CPU Temp)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                            <TextBlock Text="Processor Temperature (CPU Temp)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
                                             <StackPanel Orientation="Horizontal" Grid.Column="1">
                                                 <TextBlock Text="{Binding CpuTempNum}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
                                                 <TextBlock Text=" °C" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
@@ -160,7 +160,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Điện Năng Vi Xử Lý (CPU Power)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                            <TextBlock Text="Processor Power Draw (CPU Power)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
                                             <StackPanel Orientation="Horizontal" Grid.Column="1">
                                                 <TextBlock Text="{Binding CpuPowerNum}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
                                                 <TextBlock Text=" W" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
@@ -174,7 +174,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Sử Dụng RAM Vật Lý (RAM Usage)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                            <TextBlock Text="Physical Memory Load (RAM Usage)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
                                             <StackPanel Orientation="Horizontal" Grid.Column="1">
                                                 <TextBlock Text="{Binding RamUsagePercent}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
                                                 <TextBlock Text=" %" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
@@ -194,15 +194,15 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <TextBlock Text="BỐI CẢNH TỐI ƯU HOẠT ĐỘNG (ACTIVE CONTEXT)" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                                        <TextBlock Text="ACTIVE OPTIMIZER CONTEXT" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
 
                                         <StackPanel Grid.Row="1" Margin="0,0,0,20">
-                                            <TextBlock Text="CHẾ ĐỘ HIỆN TẠI" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,4"/>
+                                            <TextBlock Text="CURRENT GAME TARGET" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,4"/>
                                             <TextBlock Text="Esports Mode: VALORANT" FontFamily="Segoe UI Variable Text" FontSize="16" FontWeight="Bold" Foreground="#00F5A0"/>
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="2">
-                                            <TextBlock Text="CÁC BỘ TỐI ƯU ĐANG BẬT" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,8"/>
+                                            <TextBlock Text="ACTIVE SYSTEM OPTIMIZERS" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,8"/>
                                             
                                             <Grid Margin="0,0,0,10">
                                                 <Grid.ColumnDefinitions>
@@ -212,7 +212,7 @@
                                                 <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
                                                     <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Độ phân giải Timer: 0.500 ms (Độ trễ thấp)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Timer Resolution: 0.500 ms (Low latency locked)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                             </Grid>
 
                                             <Grid Margin="0,0,0,10">
@@ -223,7 +223,7 @@
                                                 <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
                                                     <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Core Parking: Tắt (Mở khóa toàn bộ nhân CPU)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="CPU Core Parking: Disabled (100% active cores)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                             </Grid>
 
                                             <Grid>
@@ -234,7 +234,7 @@
                                                 <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
                                                     <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Ngắt MSI thiết bị GPU/NIC: Ưu tiên cao" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="GPU &amp; NIC MSI Mode: Enabled (High priority interrupts)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                             </Grid>
                                         </StackPanel>
                                     </Grid>
@@ -248,13 +248,13 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <TextBlock Text="TÙY CHỌN TỐI ƯU NHANH (QUICK TWEAKS)" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                                        <TextBlock Text="QUICK TWEAKS" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
                                         
                                         <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                                            <CheckBox Content="Tắt dịch vụ Telemetry &amp; Thu thập dữ liệu" IsChecked="{Binding IsTelemetryDisabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
-                                            <CheckBox Content="Tối ưu hóa Ping mạng (TCP NoDelay)" IsChecked="{Binding IsNetworkOptimized, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
-                                            <CheckBox Content="Tự động dọn dẹp RAM Standby (Mỗi 5 phút)" IsChecked="{Binding IsRamCleanAuto, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
-                                            <CheckBox Content="Kích hoạt ngắt MSI (GPU &amp; Card mạng)" IsChecked="{Binding IsMsiEnabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White"/>
+                                            <CheckBox Content="Disable Windows Telemetry &amp; Diagnostics Services" IsChecked="{Binding IsTelemetryDisabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                                            <CheckBox Content="Optimize Gaming Ping (Disable Nagle's TCP)" IsChecked="{Binding IsNetworkOptimized, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                                            <CheckBox Content="Auto Purge Standby Memory Cache (Every 5 mins)" IsChecked="{Binding IsRamCleanAuto, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                                            <CheckBox Content="Enable Message Signaled Interrupts (MSI Mode)" IsChecked="{Binding IsMsiEnabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -270,7 +270,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <TextBlock Text="DỌN DẸP HỆ THỐNG (CLEANUP SUMMARY)" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                                        <TextBlock Text="CLEANUP SUMMARY" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
 
                                         <!-- Junk -->
                                         <Grid Grid.Row="1" Margin="0,0,0,12">
@@ -278,7 +278,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Ước Tính Dung Lượng Rác Hệ Thống" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                            <TextBlock Text="Estimated System Junk Files" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
                                             <TextBlock Text="{Binding JunkFilesText}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="1"/>
                                         </Grid>
 
@@ -288,12 +288,12 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Bộ Nhớ Đệm RAM (Standby Cache)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                            <TextBlock Text="Standby Memory Cache Size" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
                                             <TextBlock Text="{Binding StandbyMemoryText}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="1"/>
                                         </Grid>
 
                                         <!-- Run Optimize Button -->
-                                        <Button Grid.Row="4" Content="BẤM ĐỂ TỐI ƯU NGAY" Command="{Binding RunOptimizeCommand}" Style="{StaticResource FlatAccentButton}" Height="42" HorizontalAlignment="Stretch"/>
+                                        <Button Grid.Row="4" Content="RUN OPTIMIZE NOW" Command="{Binding RunOptimizeCommand}" Style="{StaticResource FlatAccentButton}" Height="42" HorizontalAlignment="Stretch"/>
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -311,7 +311,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 
-                                <TextBlock Text="CÂN CHỈNH PHẦN CỨNG THỦ CÔNG" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+                                <TextBlock Text="MANUAL HARDWARE TUNING" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
                                 
                                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                                     <StackPanel MaxWidth="700" HorizontalAlignment="Left">
@@ -352,9 +352,9 @@
                                                 
                                                 <Grid Margin="0,0,0,20">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="200"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="80"/>
+                                                        <Grid.ColumnDefinition Width="200"/>
+                                                        <Grid.ColumnDefinition Width="*"/>
+                                                        <Grid.ColumnDefinition Width="80"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="Curve Optimizer Offset:" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <Slider Minimum="-50" Maximum="0" Value="{Binding AmdCoOffset, Mode=TwoWay}" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
@@ -373,7 +373,7 @@
                                             </StackPanel>
                                         </Border>
 
-                                        <Button Content="Áp Dụng Cài Đặt Phần Cứng" Command="{Binding ApplyHardwareCommand}" Style="{StaticResource FlatAccentButton}" Width="230" Height="38" HorizontalAlignment="Left"/>
+                                        <Button Content="Apply Hardware Settings" Command="{Binding ApplyHardwareCommand}" Style="{StaticResource FlatAccentButton}" Width="230" Height="38" HorizontalAlignment="Left"/>
                                     </StackPanel>
                                 </ScrollViewer>
                             </Grid>
@@ -391,7 +391,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 
-                                <TextBlock Text="ĐO LƯỜNG &amp; ĐỐI SÁNH HIỆU NĂNG" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+                                <TextBlock Text="PERFORMANCE BENCHMARK &amp; COMPARISON" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
                                 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -408,8 +408,8 @@
                                         </Grid.RowDefinitions>
                                         
                                         <StackPanel Grid.Row="0">
-                                            <TextBlock Text="KIỂM THỬ HIỆU NĂNG TỰ ĐỘNG" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,15"/>
-                                            <TextBlock Text="Chương trình sẽ tự động chạy bài kiểm tra hiệu năng gốc (Stock), áp dụng các cài đặt tối ưu hạ thế và năng lượng, sau đó thực hiện đo lường lại (Optimized) để lập bảng đối sánh chi tiết về hiệu suất và nhiệt độ." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Margin="0,0,0,25" LineHeight="18"/>
+                                            <TextBlock Text="AUTOMATED BENCHMARK SEQUENCE" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,15"/>
+                                            <TextBlock Text="The benchmark engine will measure your system's baseline metrics (Stock), apply hardware configurations and latency tweaks, and measure them again under identical compute loads to compute real-time performance gains." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Margin="0,0,0,25" LineHeight="18"/>
                                             
                                             <!-- Progress Status -->
                                             <Border BorderBrush="#2D2D2D" BorderThickness="1" Padding="15" Margin="0,0,0,15" Visibility="{Binding ProgressCardVisibility, FallbackValue=Collapsed}">
@@ -420,7 +420,7 @@
                                             </Border>
                                         </StackPanel>
 
-                                        <Button Grid.Row="1" Content="BẮT ĐẦU CHẠY KIỂM THỬ" Command="{Binding RunAutoOptBenchmarkCommand}" Style="{StaticResource FlatAccentButton}" Height="40" HorizontalAlignment="Stretch"/>
+                                        <Button Grid.Row="1" Content="START PERFORMANCE RUN" Command="{Binding RunAutoOptBenchmarkCommand}" Style="{StaticResource FlatAccentButton}" Height="40" HorizontalAlignment="Stretch"/>
                                     </Grid>
 
                                     <!-- Splitter Line -->
@@ -433,7 +433,7 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <TextBlock Text="BẢNG SO SÁNH KẾT QUẢ ĐO LƯỜNG" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                                        <TextBlock Text="COMPARATIVE METRICS BOARD" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
                                         
                                         <Grid Grid.Row="1" VerticalAlignment="Top">
                                             <Grid.RowDefinitions>
@@ -451,10 +451,10 @@
                                             </Grid.ColumnDefinitions>
                                             
                                             <!-- Headers -->
-                                            <TextBlock Text="Thông số đo lường" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="0" Margin="0,0,0,15"/>
-                                            <TextBlock Text="Chưa tối ưu (Stock)" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="1" Margin="0,0,0,15" TextAlignment="Center"/>
-                                            <TextBlock Text="Đã tối ưu (vOptimizer)" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="2" Margin="0,0,0,15" TextAlignment="Center"/>
-                                            <TextBlock Text="Tỉ lệ cải thiện" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="3" Margin="0,0,0,15" TextAlignment="Center"/>
+                                            <TextBlock Text="Performance Metric" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="0" Margin="0,0,0,15"/>
+                                            <TextBlock Text="Stock System" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="1" Margin="0,0,0,15" TextAlignment="Center"/>
+                                            <TextBlock Text="vOptimizer Tuning" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="2" Margin="0,0,0,15" TextAlignment="Center"/>
+                                            <TextBlock Text="Improvement" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="3" Margin="0,0,0,15" TextAlignment="Center"/>
 
                                             <!-- Score -->
                                             <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Grid.Row="1" Grid.ColumnSpan="4" Padding="0,10">
@@ -465,7 +465,7 @@
                                                         <ColumnDefinition Width="130"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="Điểm Tính Toán (GOPs)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Compute Score (GOPs)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding StockScoreText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding OptScoreText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding DiffScoreText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -481,7 +481,7 @@
                                                         <ColumnDefinition Width="130"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="Nhiệt Độ Cao Nhất (°C)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Peak CPU Temp (°C)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding StockTempText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding OptTempText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding DiffTempText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -497,7 +497,7 @@
                                                         <ColumnDefinition Width="130"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="Điện Năng Trung Bình (W)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Average Power Draw (W)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding StockPowerText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding OptPowerText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding DiffPowerText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -513,7 +513,7 @@
                                                         <ColumnDefinition Width="130"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="Hiệu Suất (GOPs/Watt)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Compute Efficiency (GOPs/W)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding StockEfficiencyText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding OptEfficiencyText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding DiffEfficiencyText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -537,30 +537,30 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 
-                                <TextBlock Text="CÀI ĐẶT CẤU HÌNH vOPTIMIZER" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+                                <TextBlock Text="vOPTIMIZER SYSTEM SETTINGS" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
                                 
                                 <StackPanel Grid.Row="1" MaxWidth="700" HorizontalAlignment="Left">
                                     
                                     <!-- Eco Mode -->
                                     <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
                                         <StackPanel>
-                                            <CheckBox Content="Eco Mode (Tắt hiệu ứng giao diện)" IsChecked="{Binding IsEcoMode, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
-                                            <TextBlock Text="Vô hiệu hóa toàn bộ hiệu ứng làm mờ Mica của Windows 11 và chuyển cửa sổ sang nền xám phẳng (#141414) để giải phóng hoàn toàn tài nguyên xử lý GPU dành cho Game." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
+                                            <CheckBox Content="Eco Mode (Disable UI Effects)" IsChecked="{Binding IsEcoMode, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
+                                            <TextBlock Text="Disables Windows 11 Mica backdrop blurring effects and switches the app window background to a flat solid gray (#141414) to eliminate GPU overhead, saving rendering resources for active gaming." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
                                         </StackPanel>
                                     </Border>
                                     
                                     <!-- Task Scheduler Auto Start -->
                                     <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
                                         <StackPanel>
-                                            <CheckBox Content="Tự động khởi động cùng Windows (Bỏ qua UAC)" IsChecked="False" IsEnabled="False" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
-                                            <TextBlock Text="Thiết lập tác vụ chạy trong Windows Task Scheduler để tự động chạy vOptimizer dưới quyền Admin khi đăng nhập Windows mà không cần xác nhận UAC thủ công." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
+                                            <CheckBox Content="Autostart with Windows Login (Bypass UAC)" IsChecked="False" IsEnabled="False" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
+                                            <TextBlock Text="Registers a task in the Windows Task Scheduler to automatically launch vOptimizer with Administrator privileges at login, avoiding standard UAC prompts." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
                                         </StackPanel>
                                     </Border>
                                     
                                     <!-- Driver Info Status -->
                                     <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,0" Padding="0,0,0,0">
                                         <StackPanel>
-                                            <TextBlock Text="THÔNG TIN TRÌNH ĐIỀU KHIỂN HỆ THỐNG" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,12"/>
+                                            <TextBlock Text="SYSTEM KERNEL DRIVER STATUS" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,12"/>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -569,7 +569,7 @@
                                                 <Border Background="#00F5A0" CornerRadius="2" Padding="6,3" HorizontalAlignment="Left" Grid.Column="0">
                                                     <TextBlock Text="ACTIVE" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Foreground="Black"/>
                                                 </Border>
-                                                <TextBlock Text="Trình điều khiển kernel điều khiển phần cứng WinRing0x64 đã tải thành công tại đặc quyền Ring 0." FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="The WinRing0x64 kernel hardware driver is successfully loaded and operating at Ring 0 privileges." FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center"/>
                                             </Grid>
                                         </StackPanel>
                                     </Border>

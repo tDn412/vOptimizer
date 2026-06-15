@@ -100,8 +100,8 @@ namespace vOptimizer
                     }
                     else
                     {
-                        MessageBox.Show("Không thể khởi động driver WinRing0. Vui lòng chạy ứng dụng dưới quyền Administrator và đảm bảo WinRing0x64.dll có sẵn.", 
-                            "Cảnh Báo Driver", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Unable to load the WinRing0 kernel driver. Please run the application as Administrator and ensure WinRing0x64.dll is present in the application folder.", 
+                            "Driver Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             }
@@ -175,7 +175,7 @@ namespace vOptimizer
                         await MemoryOptimizer.PurgeSystemMemoryAsync();
                         Dispatcher.Invoke(() =>
                         {
-                            _viewModel.RamStatusText = "RAM Standby: Tự động dọn thành công";
+                            _viewModel.RamStatusText = "RAM Standby: Auto-cleared successfully";
                         });
                     });
                 }
@@ -239,12 +239,12 @@ namespace vOptimizer
         private bool _isBenchmarking = false;
         
         // Sensor values
-        private string _cpuTempText = "Nhiệt độ: -- °C";
-        private string _cpuPowerText = "Công suất: -- W";
-        private string _activeGameMode = "Chế độ: Balanced";
-        private string _activeProcessText = "Không phát hiện game đang chạy";
-        private string _tweakStatusText = "OS Tweaks: Tắt";
-        private string _ramStatusText = "RAM Standby: Sẵn sàng dọn";
+        private string _cpuTempText = "CPU Temp: -- °C";
+        private string _cpuPowerText = "CPU Power: -- W";
+        private string _activeGameMode = "Profile: Balanced";
+        private string _activeProcessText = "No active game detected";
+        private string _tweakStatusText = "OS Tweaks: Disabled";
+        private string _ramStatusText = "RAM Standby: Ready to clear";
 
         // Sliders & text inputs
         private int _intelCoreOffset = -80;
@@ -263,12 +263,12 @@ namespace vOptimizer
         private int _cpuTempNum = 45;
         private double _cpuPowerNum = 15.0;
         private int _ramUsagePercent = 50;
-        private string _junkFilesText = "Quét...";
-        private string _standbyMemoryText = "Quét...";
+        private string _junkFilesText = "Scanning...";
+        private string _standbyMemoryText = "Scanning...";
 
         // Benchmark progress and status
         private Visibility _progressCardVisibility = Visibility.Collapsed;
-        private string _benchmarkStatusText = "Sẵn sàng...";
+        private string _benchmarkStatusText = "Ready...";
 
         // Comparison statistics
         private string _stockScoreText = "-- GOPs";
@@ -315,13 +315,13 @@ namespace vOptimizer
                     
                     if (coreOk && cacheOk)
                     {
-                        MessageBox.Show($"Đã áp dụng hạ thế Intel thành công:\nCore Offset: {IntelCoreOffset} mV\nCache Offset: {IntelCacheOffset} mV", 
-                            "Áp Dụng Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Intel Undervolt Settings Applied:\nCore Offset: {IntelCoreOffset} mV\nCache Offset: {IntelCacheOffset} mV", 
+                            "Tuning Successful", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Áp dụng thất bại. Vui lòng đảm bảo driver WinRing0 được tải đúng và CPU hỗ trợ FIVR undervolting.", 
-                            "Lỗi Phần Cứng", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Tuning failed. Please make sure the WinRing0 driver is correctly loaded and the CPU supports FIVR voltage adjustments.", 
+                            "Hardware Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
@@ -337,13 +337,13 @@ namespace vOptimizer
                         {
                             if (success)
                             {
-                                MessageBox.Show($"Đã áp dụng cấu hình AMD thành công:\nCurve Optimizer: {AmdCoOffset}\nTDP: {tdp} W", 
-                                    "Áp Dụng Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show($"AMD Settings Applied:\nCurve Optimizer: {AmdCoOffset}\nTDP: {tdp} W", 
+                                    "Tuning Successful", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
-                                MessageBox.Show("Không thể thực thi RyzenAdj. Vui lòng kiểm tra xem ryzenadj.exe có nằm cùng thư mục ứng dụng hay không.", 
-                                    "Lỗi Thực Thi", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("RyzenAdj execution failed. Please verify that ryzenadj.exe is present in the application directory.", 
+                                    "Execution Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         });
                     });
@@ -351,68 +351,68 @@ namespace vOptimizer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi Lập Trình", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Program Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private async void ExecuteOptimize()
         {
             IsBenchmarking = true;
-            BenchmarkStatusText = "Đang chuẩn bị tối ưu hệ thống...";
+            BenchmarkStatusText = "Preparing system optimization...";
 
             try
             {
                 // Create a system restore point first for safety
-                BenchmarkStatusText = "Đang tạo điểm khôi phục hệ thống (System Restore)...";
+                BenchmarkStatusText = "Creating safe System Restore Point...";
                 await Task.Run(() => RestorePoint.Create("vOptimizer_OneClickTweak"));
 
                 // Apply telemetry settings
-                BenchmarkStatusText = "Đang áp dụng cấu hình vô hiệu hóa Telemetry...";
+                BenchmarkStatusText = "Applying telemetry disabling configurations...";
                 RegistryTweaker.ApplyTelemetryTweak(IsTelemetryDisabled);
 
                 // Apply network settings
-                BenchmarkStatusText = "Đang tối ưu hóa cấu hình băng thông mạng...";
+                BenchmarkStatusText = "Applying network TCP optimization overrides...";
                 RegistryTweaker.ApplyLatencyTweaks(IsNetworkOptimized);
 
                 // Apply MSI Mode settings
-                BenchmarkStatusText = "Đang tối ưu hóa MSI (Message Signaled Interrupts) Mode...";
+                BenchmarkStatusText = "Optimizing MSI (Message Signaled Interrupts) Mode...";
                 MsiOptimizer.OptimizeMsiMode(IsMsiEnabled);
 
                 // Apply Power plan tweaks
-                BenchmarkStatusText = "Đang tắt CPU Core Parking & tối ưu EPP index...";
+                BenchmarkStatusText = "Disabling CPU Core Parking & setting EPP to 0...";
                 PowerPlanManager.SetGamingPowerProfile(true);
 
                 // Purge RAM Cache and background working sets
-                BenchmarkStatusText = "Đang giải phóng bộ nhớ RAM Standby & Working Set...";
+                BenchmarkStatusText = "Purging memory Standby List & Working Sets...";
                 await MemoryOptimizer.PurgeSystemMemoryAsync();
 
                 // Clean Junk files
-                BenchmarkStatusText = "Đang dọn dẹp tập tin rác hệ thống...";
+                BenchmarkStatusText = "Cleaning system temp and junk files...";
                 await MemoryOptimizer.CleanJunkAsync();
 
                 // Enable 0.5ms Timer Resolution
-                BenchmarkStatusText = "Đang thiết lập độ phân giải Timer 0.5ms...";
+                BenchmarkStatusText = "Locking system timer resolution to 0.5ms...";
                 TimerResolution.SetResolution(5000, true, out _);
 
                 // Complete state update
-                TweakStatusText = "OS Tweaks: ĐÃ BẬT (TCP NoDelay, 100% CPU, MSI Mode, 0.5ms)";
-                RamStatusText = "RAM Standby: Đã dọn dẹp & Tự động chạy";
+                TweakStatusText = "OS Tweaks: ENABLED (TCP NoDelay, 100% CPU, MSI Mode, 0.5ms)";
+                RamStatusText = "RAM Standby: Cleared & Auto-monitoring";
 
                 // Re-scan junk files
                 double sizeGb = await MemoryOptimizer.GetJunkSizeGbAsync();
                 JunkFilesText = $"{sizeGb:0.00} GB";
 
-                MessageBox.Show("Đã hoàn thành tối ưu hệ thống một chạm thành công!\n- Đã tạo điểm khôi phục vOptimizer_OneClickTweak.\n- Đã dọn dẹp RAM & tập tin rác.\n- Đã tắt Core Parking & tối ưu độ trễ ngắt MSI.",
-                    "Tối Ưu Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("One-Click system optimization completed successfully!\n- Created Restore Point vOptimizer_OneClickTweak.\n- Cleaned system junk & cleared memory cache.\n- Disabled Core Parking & configured MSI interrupt priorities.",
+                    "Optimization Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi trong quá trình tối ưu: {ex.Message}", "Lỗi Tối Ưu", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error during optimization: {ex.Message}", "Optimization Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 IsBenchmarking = false;
-                BenchmarkStatusText = "Sẵn sàng...";
+                BenchmarkStatusText = "Ready...";
             }
         }
 
@@ -426,7 +426,7 @@ namespace vOptimizer
                 BenchmarkEngine engine = new BenchmarkEngine();
 
                 // Step 1: Run Stock Benchmark (15 seconds)
-                BenchmarkStatusText = "Đang đo lường hiệu năng gốc (Stock)... [15s]";
+                BenchmarkStatusText = "Measuring stock performance (Stock)... [15s]";
                 var stockResult = await engine.RunBenchmarkAsync(15);
 
                 StockScoreText = $"{stockResult.ScoreGops} GOPs";
@@ -435,12 +435,12 @@ namespace vOptimizer
                 StockEfficiencyText = $"{Math.Round(stockResult.ScoreGops / stockResult.AveragePower, 3)}";
 
                 // Step 2: Apply Optimization Configuration
-                BenchmarkStatusText = "Đang tạo điểm khôi phục hệ thống an toàn...";
+                BenchmarkStatusText = "Creating safe system restore point...";
                 
                 // Create Windows Restore Point first
                 RestorePoint.Create("vOptimizer_PreOptimization");
 
-                BenchmarkStatusText = "Đang kích hoạt Tối Ưu Hóa & Hàng Rào Độ Trễ...";
+                BenchmarkStatusText = "Applying low-latency tweaks & hardware configurations...";
                 
                 // Hardware undervolt & power limits
                 if (_isIntel)
@@ -458,14 +458,14 @@ namespace vOptimizer
                 RegistryTweaker.ApplyTelemetryTweak(IsTelemetryDisabled);
                 RegistryTweaker.ApplyLatencyTweaks(true);
                 MsiOptimizer.OptimizeMsiMode(true); // Force MSI Mode on GPUs and Network Cards
-                TweakStatusText = "OS Tweaks: ĐÃ BẬT (TCP NoDelay, 100% CPU, MSI Mode)";
+                TweakStatusText = "OS Tweaks: ENABLED (TCP NoDelay, 100% CPU, MSI Mode)";
 
                 // Memory Purging
                 await MemoryOptimizer.PurgeSystemMemoryAsync();
-                RamStatusText = "RAM Standby: Đã dọn dẹp trống";
+                RamStatusText = "RAM Standby: Cleared";
 
                 // Step 3: Run Optimized Benchmark (15 seconds)
-                BenchmarkStatusText = "Đang đo lường hiệu năng đã Tối Ưu... [15s]";
+                BenchmarkStatusText = "Measuring optimized performance (vOptimizer)... [15s]";
                 var optResult = await engine.RunBenchmarkAsync(15);
 
                 OptScoreText = $"{optResult.ScoreGops} GOPs";
@@ -484,18 +484,18 @@ namespace vOptimizer
                 double diffEff = ((optEff - stockEff) / stockEff) * 100;
 
                 DiffScoreText = $"{Math.Round(diffScore, 1):+0.0;-0.0;0}%";
-                DiffTempText = $"{Math.Round(-diffTemp, 1):+0.0;-0.0;0}% (Giảm nhiệt)";
+                DiffTempText = $"{Math.Round(-diffTemp, 1):+0.0;-0.0;0}% (Temp decrease)";
                 DiffPowerText = $"{Math.Round(diffPower, 1):+0.0;-0.0;0}%";
                 DiffEfficiencyText = $"{Math.Round(diffEff, 1):+0.0;-0.0;0}%";
 
-                BenchmarkStatusText = "Đã hoàn thành tối ưu hóa và đối sánh!";
-                MessageBox.Show("Quá trình Tự Động Tối Ưu Hóa & Đối Sánh hoàn tất! Hãy xem bảng so sánh bên phải để biết chi tiết cải thiện hiệu năng và nhiệt độ.", 
-                    "Hoàn Thành", MessageBoxButton.OK, MessageBoxImage.Information);
+                BenchmarkStatusText = "Optimization and comparative benchmarking complete!";
+                MessageBox.Show("Automated system optimizations and benchmarking complete! View the comparative metrics board on the right for details.", 
+                    "Completed", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi trong quá trình chạy: {ex.Message}", "Lỗi Benchmark", MessageBoxButton.OK, MessageBoxImage.Error);
-                BenchmarkStatusText = "Lỗi trong quá trình benchmark.";
+                MessageBox.Show($"Error during benchmark run: {ex.Message}", "Benchmark Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                BenchmarkStatusText = "Error during benchmark run.";
             }
             finally
             {
