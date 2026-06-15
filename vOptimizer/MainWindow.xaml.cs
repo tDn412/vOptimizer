@@ -244,6 +244,11 @@ namespace vOptimizer
                 StockEfficiencyText = $"{Math.Round(stockResult.ScoreGops / stockResult.AveragePower, 3)}";
 
                 // Step 2: Apply Optimization Configuration
+                BenchmarkStatusText = "Đang tạo điểm khôi phục hệ thống an toàn...";
+                
+                // Create Windows Restore Point first
+                RestorePoint.Create("vOptimizer_PreOptimization");
+
                 BenchmarkStatusText = "Đang kích hoạt Tối Ưu Hóa & Hàng Rào Độ Trễ...";
                 
                 // Hardware undervolt & power limits
@@ -260,7 +265,8 @@ namespace vOptimizer
 
                 // OS level Tweaks
                 RegistryTweaker.ApplyLatencyTweaks(true);
-                TweakStatusText = "OS Tweaks: ĐÃ BẬT (TCP NoDelay, 100% CPU)";
+                MsiOptimizer.OptimizeMsiMode(true); // Force MSI Mode on GPUs and Network Cards
+                TweakStatusText = "OS Tweaks: ĐÃ BẬT (TCP NoDelay, 100% CPU, MSI Mode)";
 
                 // Memory Purging
                 await MemoryOptimizer.PurgeSystemMemoryAsync();

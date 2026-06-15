@@ -58,6 +58,48 @@ namespace vOptimizer.Core
         }
 
         /// <summary>
+        /// Applies the specified tuning parameters using per-core Curve Optimizer offsets.
+        /// </summary>
+        /// <param name="stapmWatts">Sustained power limit (STAPM) in Watts</param>
+        /// <param name="slowWatts">Slow power limit in Watts</param>
+        /// <param name="fastWatts">Fast power limit in Watts</param>
+        /// <param name="tempLimit">Target temperature ceiling in °C</param>
+        /// <param name="coreOffsets">Array of negative CO offsets per core (index maps to core number)</param>
+        /// <param name="gfxClkMhz">GPU clock limit in MHz (optional, 0 to ignore)</param>
+        public static async Task<bool> ApplyPerCoreSettingsAsync(int stapmWatts, int slowWatts, int fastWatts, int tempLimit, int[] coreOffsets, int gfxClkMhz = 0)
+        {
+            try
+            {
+                // Format RyzenAdj arguments
+                string arguments = $"--stapm-limit={stapmWatts * 1000} " +
+                                   $"--slow-limit={slowWatts * 1000} " +
+                                   $"--fast-limit={fastWatts * 1000} " +
+                                   $"--tctl-temp={tempLimit} ";
+
+                // Append per-core CO values: --set-coreco=<index>=<value>
+                for (int i = 0; i < coreOffsets.Length; i++)
+                {
+                    if (coreOffsets[i] != 0)
+                    {
+                        uint coValue = 0x100000 - (uint)Math.Abs(coreOffsets[i]);
+                        arguments += $"--set-coreco={i}={coValue} ";
+                    }
+                }
+
+                if (gfxClkMhz > 0)
+                {
+                    arguments += $"--gfx-clk={gfxClkMhz} ";
+                }
+
+                return await ExecuteRyzenAdjAsync(arguments);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Executes RyzenAdj CLI in a hidden process with administrator rights.
         /// </summary>
         private static Task<bool> ExecuteRyzenAdjAsync(string arguments)

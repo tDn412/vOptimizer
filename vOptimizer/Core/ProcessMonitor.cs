@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Threading.Tasks;
+using vOptimizer.Tweaks;
 
 namespace vOptimizer.Core
 {
@@ -15,6 +16,10 @@ namespace vOptimizer.Core
         private ManagementEventWatcher? _watcher;
         private readonly List<string> _targetGames;
         private readonly bool _isEsportsMode;
+
+        private static readonly string[] BackgroundApps = {
+            "chrome", "msedge", "firefox", "discord", "steamwebhelper", "epicgameslauncher", "galaxyclient"
+        };
 
         public event Action<string, Process>? GameDetected;
 
@@ -99,7 +104,7 @@ namespace vOptimizer.Core
         }
 
         /// <summary>
-        /// Elevates the process priority and pins threads to physical cores (even logical threads).
+        /// Elevates the process priority, pins threads to physical cores, and configures active OS performance profiles.
         /// </summary>
         private void OptimizeGameProcess(Process process)
         {
@@ -132,10 +137,74 @@ namespace vOptimizer.Core
                         Debug.WriteLine($"[ProcessMonitor] Pinning {process.ProcessName} to physical cores (Affinity mask: {mask:X}).");
                     }
                 }
+
+                // 3. Apply active performance power plan (unpark cores, EPP=0)
+                PowerPlanManager.SetGamingPowerProfile(true);
+
+                // 4. Request dynamic 0.5ms timer resolution
+                TimerResolution.SetHighResolution(true);
+
+                // 5. Demote background apps (Chrome, Discord, etc.)
+                DemoteBackgroundProcesses(true);
+
+                // 6. Listen to process exits to automatically revert changes
+                process.EnableRaisingEvents = true;
+                process.Exited += (s, e) =>
+                {
+                    Debug.WriteLine($"[ProcessMonitor] Game process {process.ProcessName} exited. Cleaning up tweaks...");
+                    
+                    // Revert background app priorities
+                    DemoteBackgroundProcesses(false);
+
+                    // Revert power plans (restore core parking & original EPP)
+                    PowerPlanManager.SetGamingPowerProfile(false);
+
+                    // Release 0.5ms timer resolution
+                    TimerResolution.SetHighResolution(false);
+                };
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ProcessMonitor] Could not optimize process {process.ProcessName}: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Demotes heavy background apps to BelowNormal priority to prevent CPU spikes, or restores them to Normal.
+        /// </summary>
+        private void DemoteBackgroundProcesses(bool demote)
+        {
+            foreach (string app in BackgroundApps)
+            {
+                try
+                {
+                    Process[] processes = Process.GetProcessesByName(app);
+                    foreach (Process p in processes)
+                    {
+                        try
+                        {
+                            if (p.HasExited) continue;
+                            if (demote)
+                            {
+                                if (p.PriorityClass == ProcessPriorityClass.Normal)
+                                {
+                                    p.PriorityClass = ProcessPriorityClass.BelowNormal;
+                                    Debug.WriteLine($"[ProcessMonitor] Demoted background process {p.ProcessName} (PID: {p.Id}) to BelowNormal.");
+                                }
+                            }
+                            else
+                            {
+                                if (p.PriorityClass == ProcessPriorityClass.BelowNormal)
+                                {
+                                    p.PriorityClass = ProcessPriorityClass.Normal;
+                                    Debug.WriteLine($"[ProcessMonitor] Restored background process {p.ProcessName} (PID: {p.Id}) to Normal.");
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
             }
         }
     }
