@@ -95,5 +95,69 @@ namespace vOptimizer.Tweaks
                 Debug.WriteLine($"[RegistryTweaker] Error writing to registry: {ex.Message}");
             }
         }
+
+        /// <summary>
+        /// Disables or restores Windows telemetry policies and diagnostics services to reduce idle CPU background overhead.
+        /// </summary>
+        public static void ApplyTelemetryTweak(bool disable)
+        {
+            try
+            {
+                // Disable telemetry policies in Policies registry paths
+                using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Policies\Microsoft\Windows\DataCollection", true))
+                {
+                    key.SetValue("AllowTelemetry", disable ? 0 : 1, RegistryValueKind.DWord);
+                }
+                using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", true))
+                {
+                    key.SetValue("AllowTelemetry", disable ? 0 : 1, RegistryValueKind.DWord);
+                }
+                using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection", true))
+                {
+                    key.SetValue("AllowTelemetry", disable ? 0 : 1, RegistryValueKind.DWord);
+                }
+
+                Debug.WriteLine($"[RegistryTweaker] Telemetry policies set to {(disable ? "Disabled" : "Enabled")}.");
+
+                // Disable the diagnostics service (DiagTrack) and WAP Push routing service (dmwappushservice)
+                if (disable)
+                {
+                    RunCommand("sc.exe stop DiagTrack");
+                    RunCommand("sc.exe config DiagTrack start= disabled");
+                    RunCommand("sc.exe stop dmwappushservice");
+                    RunCommand("sc.exe config dmwappushservice start= disabled");
+                }
+                else
+                {
+                    RunCommand("sc.exe config DiagTrack start= auto");
+                    RunCommand("sc.exe start DiagTrack");
+                    RunCommand("sc.exe config dmwappushservice start= demand");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[RegistryTweaker] Telemetry tweak failed: {ex.Message}");
+            }
+        }
+
+        private static void RunCommand(string command)
+        {
+            try
+            {
+                var parts = command.Split(' ', 2);
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = parts[0],
+                    Arguments = parts.Length > 1 ? parts[1] : "",
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                };
+                Process.Start(startInfo)?.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[RegistryTweaker] RunCommand {command} failed: {ex.Message}");
+            }
+        }
     }
 }
