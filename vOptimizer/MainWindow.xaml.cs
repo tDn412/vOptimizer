@@ -265,6 +265,7 @@ namespace vOptimizer
         private int _ramUsagePercent = 50;
         private string _junkFilesText = "Scanning...";
         private string _standbyMemoryText = "Scanning...";
+        private int _benchmarkDurationSec = 60;
 
         // Benchmark progress and status
         private Visibility _progressCardVisibility = Visibility.Collapsed;
@@ -425,9 +426,9 @@ namespace vOptimizer
             {
                 BenchmarkEngine engine = new BenchmarkEngine();
 
-                // Step 1: Run Stock Benchmark (15 seconds)
-                BenchmarkStatusText = "Measuring stock performance (Stock)... [15s]";
-                var stockResult = await engine.RunBenchmarkAsync(15);
+                // Step 1: Run Stock Benchmark
+                BenchmarkStatusText = $"Measuring stock performance (Stock)... [{BenchmarkDurationSec}s]";
+                var stockResult = await engine.RunBenchmarkAsync(BenchmarkDurationSec);
 
                 StockScoreText = $"{stockResult.ScoreGops} GOPs";
                 StockTempText = $"{stockResult.PeakTemp} °C";
@@ -464,9 +465,9 @@ namespace vOptimizer
                 await MemoryOptimizer.PurgeSystemMemoryAsync();
                 RamStatusText = "RAM Standby: Cleared";
 
-                // Step 3: Run Optimized Benchmark (15 seconds)
-                BenchmarkStatusText = "Measuring optimized performance (vOptimizer)... [15s]";
-                var optResult = await engine.RunBenchmarkAsync(15);
+                // Step 3: Run Optimized Benchmark
+                BenchmarkStatusText = $"Measuring optimized performance (vOptimizer)... [{BenchmarkDurationSec}s]";
+                var optResult = await engine.RunBenchmarkAsync(BenchmarkDurationSec);
 
                 OptScoreText = $"{optResult.ScoreGops} GOPs";
                 OptTempText = $"{optResult.PeakTemp} °C";
@@ -533,6 +534,7 @@ namespace vOptimizer
 
         public Visibility ProgressCardVisibility { get => _progressCardVisibility; set { _progressCardVisibility = value; OnPropertyChanged(); } }
         public string BenchmarkStatusText { get => _benchmarkStatusText; set { _benchmarkStatusText = value; OnPropertyChanged(); } }
+        public int BenchmarkDurationSec { get => _benchmarkDurationSec; set { _benchmarkDurationSec = value; OnPropertyChanged(); } }
 
         public string StockScoreText { get => _stockScoreText; set { _stockScoreText = value; OnPropertyChanged(); } }
         public string OptScoreText { get => _optScoreText; set { _optScoreText = value; OnPropertyChanged(); } }

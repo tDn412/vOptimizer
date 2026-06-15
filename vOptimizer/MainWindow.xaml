@@ -410,7 +410,24 @@
                                         <StackPanel Grid.Row="0">
                                             <TextBlock Text="AUTOMATED BENCHMARK SEQUENCE" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,15"/>
                                             <TextBlock Text="The benchmark engine will measure your system's baseline metrics (Stock), apply hardware configurations and latency tweaks, and measure them again under identical compute loads to compute real-time performance gains." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Margin="0,0,0,25" LineHeight="18"/>
-                                            
+
+                                            <!-- Benchmark Test Duration Selector -->
+                                            <StackPanel Margin="0,0,0,25">
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="Test Run Duration:" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                                                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                                        <TextBlock Text="{Binding BenchmarkDurationSec}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0"/>
+                                                        <TextBlock Text=" seconds" FontFamily="Segoe UI Variable Text" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Slider Minimum="30" Maximum="600" Value="{Binding BenchmarkDurationSec, Mode=TwoWay}" TickFrequency="30" IsSnapToTickEnabled="True"/>
+                                                <TextBlock Text="* Note: Longer runs (180s - 600s) are highly recommended. This allows the heatsink to reach thermal saturation to accurately test undervolting stability and throttling." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,8,0,0" LineHeight="15"/>
+                                            </StackPanel>
+
                                             <!-- Progress Status -->
                                             <Border BorderBrush="#2D2D2D" BorderThickness="1" Padding="15" Margin="0,0,0,15" Visibility="{Binding ProgressCardVisibility, FallbackValue=Collapsed}">
                                                 <StackPanel HorizontalAlignment="Center">
