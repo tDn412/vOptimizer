@@ -1,0 +1,55 @@
+<Page x:Class="vOptimizer.Views.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="SettingsPage">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="vOPTIMIZER SYSTEM SETTINGS" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+        
+        <StackPanel Grid.Row="1" MaxWidth="700" HorizontalAlignment="Left">
+            
+            <!-- Eco Mode -->
+            <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
+                <StackPanel>
+                    <CheckBox Content="Eco Mode (Disable UI Effects)" IsChecked="{Binding IsEcoMode, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
+                    <TextBlock Text="Disables Windows 11 Mica backdrop blurring effects and switches the app window background to a flat solid gray (#141414) to eliminate GPU overhead, saving rendering resources for active gaming." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Task Scheduler Auto Start -->
+            <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
+                <StackPanel>
+                    <CheckBox Content="Autostart with Windows Login (Bypass UAC)" IsChecked="False" IsEnabled="False" FontFamily="Segoe UI Variable Text" FontSize="13.5" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,8"/>
+                    <TextBlock Text="Registers a task in the Windows Task Scheduler to automatically launch vOptimizer with Administrator privileges at login, avoiding standard UAC prompts." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="Gray" Margin="25,0,0,0" LineHeight="17"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Driver Info Status -->
+            <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,0" Padding="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="SYSTEM KERNEL DRIVER STATUS" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,12"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#00F5A0" CornerRadius="2" Padding="6,3" HorizontalAlignment="Left" Grid.Column="0">
+                            <TextBlock Text="ACTIVE" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Foreground="Black"/>
+                        </Border>
+                        <TextBlock Text="The WinRing0x64 kernel hardware driver is successfully loaded and operating at Ring 0 privileges." FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

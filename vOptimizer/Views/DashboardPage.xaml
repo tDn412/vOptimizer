@@ -1,0 +1,193 @@
+<Page x:Class="vOptimizer.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="DashboardPage">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Top-Left: SYSTEM STATUS -->
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#2D2D2D" BorderThickness="0,0,1,1" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="SYSTEM STATUS" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                
+                <!-- Temperature -->
+                <Grid Grid.Row="1" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Processor Temperature (CPU Temp)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <TextBlock Text="{Binding CpuTempNum}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
+                        <TextBlock Text=" °C" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
+                    </StackPanel>
+                </Grid>
+                <ProgressBar Grid.Row="2" Value="{Binding CpuTempNum}" Minimum="0" Maximum="100" Style="{StaticResource FlatProgressBar}" Margin="0,0,0,20"/>
+
+                <!-- CPU Power -->
+                <Grid Grid.Row="3" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Processor Power Draw (CPU Power)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <TextBlock Text="{Binding CpuPowerNum}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
+                        <TextBlock Text=" W" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
+                    </StackPanel>
+                </Grid>
+                <ProgressBar Grid.Row="4" Value="{Binding CpuPowerNum}" Minimum="0" Maximum="150" Style="{StaticResource FlatProgressBar}" Margin="0,0,0,20"/>
+
+                <!-- RAM Usage -->
+                <Grid Grid.Row="5" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Physical Memory Load (RAM Usage)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <TextBlock Text="{Binding RamUsagePercent}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0"/>
+                        <TextBlock Text=" %" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="Gray"/>
+                    </StackPanel>
+                </Grid>
+                <ProgressBar Grid.Row="6" Value="{Binding RamUsagePercent}" Minimum="0" Maximum="100" Style="{StaticResource FlatProgressBar}"/>
+            </Grid>
+        </Border>
+
+        <!-- Top-Right: ACTIVE OPTIMIZER CONTEXT -->
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="ACTIVE OPTIMIZER CONTEXT" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+
+                <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                    <TextBlock Text="CURRENT GAME TARGET" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,4"/>
+                    <TextBlock Text="Esports Mode: VALORANT" FontFamily="Segoe UI Variable Text" FontSize="16" FontWeight="Bold" Foreground="#00F5A0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="ACTIVE SYSTEM OPTIMIZERS" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,0,0,8"/>
+                    
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
+                            <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                        </Border>
+                        <TextBlock Text="Timer Resolution: 0.500 ms (Low latency locked)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
+                            <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                        </Border>
+                        <TextBlock Text="CPU Core Parking: Disabled (100% active cores)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#00F5A0" CornerRadius="2" Padding="5,2" Grid.Column="0">
+                            <TextBlock Text="ON" FontFamily="Consolas" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                        </Border>
+                        <TextBlock Text="GPU &amp; NIC MSI Mode: Enabled (High priority interrupts)" FontFamily="Segoe UI Variable Text" FontSize="12.5" Foreground="White" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Bottom-Left: QUICK TWEAKS -->
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#2D2D2D" BorderThickness="0,0,1,0" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="QUICK TWEAKS" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                
+                <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                    <CheckBox Content="Disable Windows Telemetry &amp; Diagnostics Services" IsChecked="{Binding IsTelemetryDisabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                    <CheckBox Content="Optimize Gaming Ping (Disable Nagle's TCP)" IsChecked="{Binding IsNetworkOptimized, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                    <CheckBox Content="Auto Purge Standby Memory Cache (Every 5 mins)" IsChecked="{Binding IsRamCleanAuto, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" Margin="0,0,0,12"/>
+                    <CheckBox Content="Enable Message Signaled Interrupts (MSI Mode)" IsChecked="{Binding IsMsiEnabled, Mode=TwoWay}" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Bottom-Right: CLEANUP SUMMARY & ONE-CLICK BUTTON -->
+        <Border Grid.Row="1" Grid.Column="1" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="CLEANUP SUMMARY" FontFamily="Segoe UI Variable Text" FontSize="11" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+
+                <!-- Junk -->
+                <Grid Grid.Row="1" Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Estimated System Junk Files" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                    <TextBlock Text="{Binding JunkFilesText}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Cached Standby -->
+                <Grid Grid.Row="2" Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Standby Memory Cache Size" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                    <TextBlock Text="{Binding StandbyMemoryText}" FontFamily="Consolas" FontSize="15" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Run Optimize Button -->
+                <Button Grid.Row="4" Content="RUN OPTIMIZE NOW" Command="{Binding RunOptimizeCommand}" Style="{StaticResource FlatAccentButton}" Height="42" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

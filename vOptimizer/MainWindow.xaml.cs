@@ -62,6 +62,12 @@ namespace vOptimizer
 
             // Run initial scan of junk files
             UpdateJunkSizeAsync();
+
+            // Set initial navigation page on load
+            Loaded += (s, e) =>
+            {
+                NavView.Navigate(typeof(vOptimizer.Views.DashboardPage));
+            };
         }
 
         private bool DetectCpuBrand()

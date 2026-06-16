@@ -1,0 +1,166 @@
+<Page x:Class="vOptimizer.Views.BenchmarkPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="BenchmarkPage">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="PERFORMANCE BENCHMARK &amp; COMPARISON" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- Controls -->
+            <Grid Grid.Column="0" Margin="0,0,25,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="AUTOMATED BENCHMARK SEQUENCE" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,15"/>
+                    <TextBlock Text="The benchmark engine will measure your system's baseline metrics (Stock), apply hardware configurations and latency tweaks, and measure them again under identical compute loads to compute real-time performance gains." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray" Margin="0,0,0,25" LineHeight="18"/>
+
+                    <!-- Benchmark Test Duration Selector -->
+                    <StackPanel Margin="0,0,0,25">
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Test Run Duration:" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="LightGray"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <TextBlock Text="{Binding BenchmarkDurationSec}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0"/>
+                                <TextBlock Text=" seconds" FontFamily="Segoe UI Variable Text" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                        <Slider Minimum="30" Maximum="600" Value="{Binding BenchmarkDurationSec, Mode=TwoWay}" TickFrequency="30" IsSnapToTickEnabled="True"/>
+                        <TextBlock Text="* Note: Longer runs (180s - 600s) are highly recommended. This allows the heatsink to reach thermal saturation to accurately test undervolting stability and throttling." TextWrapping="Wrap" FontFamily="Segoe UI Variable Text" FontSize="11" Foreground="Gray" Margin="0,8,0,0" LineHeight="15"/>
+                    </StackPanel>
+
+                    <!-- Progress Status -->
+                    <Border BorderBrush="#2D2D2D" BorderThickness="1" Padding="15" Margin="0,0,0,15" Visibility="{Binding ProgressCardVisibility, FallbackValue=Collapsed}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <ProgressBar IsIndeterminate="True" Height="4" Foreground="#00F5A0" Background="#2D2D2D" BorderThickness="0" Width="220" Margin="0,0,0,12"/>
+                            <TextBlock Text="{Binding BenchmarkStatusText}" TextWrapping="Wrap" TextAlignment="Center" FontFamily="Segoe UI Variable Text" FontSize="12" Foreground="#00F5A0" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <Button Grid.Row="1" Content="START PERFORMANCE RUN" Command="{Binding RunAutoOptBenchmarkCommand}" Style="{StaticResource FlatAccentButton}" Height="40" HorizontalAlignment="Stretch"/>
+            </Grid>
+
+            <!-- Splitter Line -->
+            <Border Grid.Column="1" Background="#2D2D2D" Width="1" VerticalAlignment="Stretch"/>
+            
+            <!-- Results Side-by-Side Table -->
+            <Grid Grid.Column="2" Margin="25,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="COMPARATIVE METRICS BOARD" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Headers -->
+                    <TextBlock Text="Performance Metric" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="0" Margin="0,0,0,15"/>
+                    <TextBlock Text="Stock System" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="1" Margin="0,0,0,15" TextAlignment="Center"/>
+                    <TextBlock Text="vOptimizer Tuning" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="2" Margin="0,0,0,15" TextAlignment="Center"/>
+                    <TextBlock Text="Improvement" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Grid.Row="0" Grid.Column="3" Margin="0,0,0,15" TextAlignment="Center"/>
+
+                    <!-- Score -->
+                    <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Grid.Row="1" Grid.ColumnSpan="4" Padding="0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Compute Score (GOPs)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StockScoreText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding OptScoreText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding DiffScoreText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- Peak Temp -->
+                    <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Grid.Row="2" Grid.ColumnSpan="4" Padding="0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Peak CPU Temp (°C)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StockTempText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding OptTempText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding DiffTempText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Avg Power -->
+                    <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Grid.Row="3" Grid.ColumnSpan="4" Padding="0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Average Power Draw (W)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StockPowerText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding OptPowerText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding DiffPowerText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Efficiency -->
+                    <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,0" Grid.Row="4" Grid.ColumnSpan="4" Padding="0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Compute Efficiency (GOPs/W)" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StockEfficiencyText}" FontFamily="Consolas" FontSize="14" Foreground="LightGray" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding OptEfficiencyText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding DiffEfficiencyText}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

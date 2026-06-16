@@ -1,0 +1,83 @@
+<Page x:Class="vOptimizer.Views.HardwarePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="HardwarePage">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="MANUAL HARDWARE TUNING" FontFamily="Segoe UI Variable Text" FontSize="18" FontWeight="Bold" Foreground="#00F5A0" Margin="0,0,0,35"/>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="700" HorizontalAlignment="Left">
+                
+                <!-- Intel FIVR -->
+                <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
+                    <StackPanel>
+                        <TextBlock Text="INTEL FIVR VOLTAGE OFFSETS" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                        
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="CPU Core Offset (mV):" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <Slider Minimum="-250" Maximum="0" Value="{Binding IntelCoreOffset, Mode=TwoWay}" TickFrequency="5" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding IntelCoreOffset, StringFormat={}{0} mV}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="CPU Cache Offset (mV):" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <Slider Minimum="-250" Maximum="0" Value="{Binding IntelCacheOffset, Mode=TwoWay}" TickFrequency="5" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding IntelCacheOffset, StringFormat={}{0} mV}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- AMD Section -->
+                <Border BorderBrush="#2D2D2D" BorderThickness="0,0,0,1" Padding="0,0,0,25" Margin="0,0,0,25">
+                    <StackPanel>
+                        <TextBlock Text="AMD RYZEN CURVE OPTIMIZER &amp; TDP" FontFamily="Segoe UI Variable Text" FontSize="12" FontWeight="Bold" Foreground="Gray" Margin="0,0,0,20"/>
+                        
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Curve Optimizer Offset:" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <Slider Minimum="-50" Maximum="0" Value="{Binding AmdCoOffset, Mode=TwoWay}" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding AmdCoOffset}" FontFamily="Consolas" FontSize="14" FontWeight="Bold" Foreground="#00F5A0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Target TDP Limit (W):" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding AmdTdpText, Mode=TwoWay}" Grid.Column="1" FontFamily="Consolas" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="28" Background="#1C1C1C" Foreground="White" BorderBrush="#2D2D2D" BorderThickness="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Button Content="Apply Hardware Settings" Command="{Binding ApplyHardwareCommand}" Style="{StaticResource FlatAccentButton}" Width="230" Height="38" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
