@@ -89,6 +89,68 @@ namespace vOptimizer.Tweaks
                             : $"[RegistryTweaker] Restored TCP default state on {interfaceCount} network interfaces.");
                     }
                 }
+
+                // 3. Win32PrioritySeparation (Foreground priority boost)
+                using (RegistryKey? key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\PriorityControl", true))
+                {
+                    if (key != null)
+                    {
+                        if (enable)
+                        {
+                            key.SetValue("Win32PrioritySeparation", 38, RegistryValueKind.DWord);
+                            Debug.WriteLine("[RegistryTweaker] Applied Win32PrioritySeparation = 38.");
+                        }
+                        else
+                        {
+                            key.SetValue("Win32PrioritySeparation", 2, RegistryValueKind.DWord);
+                            Debug.WriteLine("[RegistryTweaker] Restored Win32PrioritySeparation = 2.");
+                        }
+                    }
+                }
+
+                // 4. Keyboard Repeat Latency Optimization
+                using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Keyboard", true))
+                {
+                    if (key != null)
+                    {
+                        if (enable)
+                        {
+                            key.SetValue("KeyboardDelay", "0", RegistryValueKind.String);
+                            key.SetValue("KeyboardSpeed", "31", RegistryValueKind.String);
+                            Debug.WriteLine("[RegistryTweaker] Applied Keyboard repeat delay = 0 & speed = 31.");
+                        }
+                        else
+                        {
+                            key.SetValue("KeyboardDelay", "1", RegistryValueKind.String);
+                            key.SetValue("KeyboardSpeed", "31", RegistryValueKind.String);
+                            Debug.WriteLine("[RegistryTweaker] Restored Keyboard repeat defaults.");
+                        }
+                    }
+                }
+
+                // 5. Disable Accessibility Hotkeys (StickyKeys, ToggleKeys, FilterKeys/Keyboard Response) to prevent gaming popups
+                using (RegistryKey? stickyKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Accessibility\StickyKeys", true))
+                using (RegistryKey? keyboardRespKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Accessibility\Keyboard Response", true))
+                using (RegistryKey? toggleKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Accessibility\ToggleKeys", true))
+                {
+                    if (stickyKey != null && keyboardRespKey != null && toggleKey != null)
+                    {
+                        if (enable)
+                        {
+                            stickyKey.SetValue("Flags", "510", RegistryValueKind.String);
+                            keyboardRespKey.SetValue("Flags", "122", RegistryValueKind.String);
+                            toggleKey.SetValue("Flags", "58", RegistryValueKind.String);
+                            Debug.WriteLine("[RegistryTweaker] Disabled accessibility keyboard hotkeys.");
+                        }
+                        else
+                        {
+                            stickyKey.SetValue("Flags", "506", RegistryValueKind.String);
+                            keyboardRespKey.SetValue("Flags", "126", RegistryValueKind.String);
+                            toggleKey.SetValue("Flags", "62", RegistryValueKind.String);
+                            Debug.WriteLine("[RegistryTweaker] Restored accessibility keyboard hotkeys default flags.");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

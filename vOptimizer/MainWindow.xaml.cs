@@ -16,7 +16,7 @@ namespace vOptimizer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Wpf.Ui.Controls.UiWindow
+    public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
     {
         private readonly MainViewModel _viewModel;
         private readonly DispatcherTimer _sensorTimer;
@@ -393,7 +393,7 @@ namespace vOptimizer
 
                 // Enable 0.5ms Timer Resolution
                 BenchmarkStatusText = "Locking system timer resolution to 0.5ms...";
-                TimerResolution.SetResolution(5000, true, out _);
+                TimerResolution.SetHighResolution(true);
 
                 // Complete state update
                 TweakStatusText = "OS Tweaks: ENABLED (TCP NoDelay, 100% CPU, MSI Mode, 0.5ms)";

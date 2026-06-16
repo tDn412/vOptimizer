@@ -34,10 +34,10 @@ namespace vOptimizer.Tweaks
         private static extern uint PowerSetActiveScheme(IntPtr UserRootPowerKey, ref Guid ActivePolicyGuid);
 
         // Power Settings GUIDs
-        private static readonly Guid GUID_PROCESSOR_SETTINGS_SUBGROUP = new Guid("54533251-50e3-4f7b-9945-4739174640f4");
-        private static readonly Guid GUID_PROCESSOR_CORE_PARKING_MIN_CORES = new Guid("0cc5b647-c36e-4d5d-940f-782f91a88010");
-        private static readonly Guid GUID_PROCESSOR_CORE_PARKING_MAX_CORES = new Guid("ea06c951-1d8c-47a4-aa90-07155a75b255");
-        private static readonly Guid GUID_PROCESSOR_ENERGY_PERFORMANCE_PREFERENCE = new Guid("3668a663-3452-4fd7-861d-793434d48557");
+        private static Guid GUID_PROCESSOR_SETTINGS_SUBGROUP = new Guid("54533251-50e3-4f7b-9945-4739174640f4");
+        private static Guid GUID_PROCESSOR_CORE_PARKING_MIN_CORES = new Guid("0cc5b647-c36e-4d5d-940f-782f91a88010");
+        private static Guid GUID_PROCESSOR_CORE_PARKING_MAX_CORES = new Guid("ea06c951-1d8c-47a4-aa90-07155a75b255");
+        private static Guid GUID_PROCESSOR_ENERGY_PERFORMANCE_PREFERENCE = new Guid("3668a663-3452-4fd7-861d-793434d48557");
 
         // Saved original values for restoring
         private static uint _originalMinCores = 10;

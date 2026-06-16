@@ -1,16 +1,15 @@
-<ui:UiWindow x:Class="vOptimizer.MainWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             mc:Ignorable="d"
-             Title="vOptimizer - Windows System Optimizer" Height="650" Width="1000"
-             WindowStartupLocation="CenterScreen"
-             ExtendsContentIntoTitleBar="True"
-             WindowBackdropType="Mica"
-             Background="Transparent"
-             Theme="Dark">
+<ui:FluentWindow x:Class="vOptimizer.MainWindow"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+              mc:Ignorable="d"
+              Title="vOptimizer - Windows System Optimizer" Height="650" Width="1000"
+              WindowStartupLocation="CenterScreen"
+              ExtendsContentIntoTitleBar="True"
+              WindowBackdropType="Mica"
+              Background="Transparent">
     
     <Window.Resources>
         <!-- Flat Button Style -->
@@ -22,7 +21,7 @@
             <Setter Property="Padding" Value="15,8"/>
             <Setter Property="FontFamily" Value="Segoe UI Variable Text"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FocusVisualStyle" Value="{Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -45,7 +44,7 @@
             <Setter Property="Padding" Value="15,10"/>
             <Setter Property="FontFamily" Value="Segoe UI Variable Text"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FocusVisualStyle" Value="{Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -105,8 +104,6 @@
         <!-- Main Layout with NavigationView (transparent backdrop for seamless blending) -->
         <ui:NavigationView Grid.Row="1"
                             PaneDisplayMode="LeftCompact"
-                            IsSettingsVisible="False"
-                            PaneBackground="Transparent"
                             Background="Transparent">
             
             <ui:NavigationView.MenuItems>
@@ -334,9 +331,9 @@
 
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <Grid.ColumnDefinition Width="200"/>
-                                                        <Grid.ColumnDefinition Width="*"/>
-                                                        <Grid.ColumnDefinition Width="80"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="80"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="CPU Cache Offset (mV):" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <Slider Minimum="-250" Maximum="0" Value="{Binding IntelCacheOffset, Mode=TwoWay}" TickFrequency="5" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
@@ -352,9 +349,9 @@
                                                 
                                                 <Grid Margin="0,0,0,20">
                                                     <Grid.ColumnDefinitions>
-                                                        <Grid.ColumnDefinition Width="200"/>
-                                                        <Grid.ColumnDefinition Width="*"/>
-                                                        <Grid.ColumnDefinition Width="80"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="80"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="Curve Optimizer Offset:" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <Slider Minimum="-50" Maximum="0" Value="{Binding AmdCoOffset, Mode=TwoWay}" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Column="1" VerticalAlignment="Center"/>
@@ -363,9 +360,9 @@
 
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <Grid.ColumnDefinition Width="200"/>
-                                                        <Grid.ColumnDefinition Width="150"/>
-                                                        <Grid.ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="150"/>
+                                                        <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="Target TDP Limit (W):" FontFamily="Segoe UI Variable Text" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
                                                     <TextBox Text="{Binding AmdTdpText, Mode=TwoWay}" Grid.Column="1" FontFamily="Consolas" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="28" Background="#1C1C1C" Foreground="White" BorderBrush="#2D2D2D" BorderThickness="1"/>
@@ -598,8 +595,6 @@
                 
             </ui:NavigationView.MenuItems>
 
-            <ui:Frame x:Name="RootFrame" />
-
         </ui:NavigationView>
     </Grid>
-</ui:UiWindow>
+</ui:FluentWindow>
