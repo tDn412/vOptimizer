@@ -103,7 +103,7 @@
 
         <!-- Main Layout with NavigationView (transparent backdrop for seamless blending) -->
         <ui:NavigationView Grid.Row="1"
-                            PaneDisplayMode="LeftCompact"
+                            PaneDisplayMode="Left"
                             Background="Transparent">
             
             <ui:NavigationView.MenuItems>
